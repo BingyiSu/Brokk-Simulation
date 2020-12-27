@@ -1,0 +1,95 @@
+<?xml version="1.0" ?>
+
+<robot name="$(arg roboname)" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--Car Body-->
+  <link name="robot_chassis">
+    <inertial>
+      <mass value="5"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <collision name="chassis_collision">
+      <origin xyz="0  0  0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size=".4 .2 .1"/>
+      </geometry>
+    </collision>
+    <collision name="caster_collision">
+      <origin xyz="-0.15  0    0.05" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius=".05"/>
+      </geometry>
+    </collision>
+    <visual name="chassis_visual">
+      <origin xyz="0   0   0.15" rpy="0 0 0"/>
+      <geometry>
+        <box size=".4 .2 .1"/>
+      </geometry>
+    </visual>
+    <visual name="caster_visual">
+      <origin xyz="-0.15  0    0.05" rpy="0 0 0"/>
+      <geometry>
+        <sphere radius=".05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+
+  <link name="left_wheel">
+    <inertial>
+      <mass value="1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <collision name="left_wheel_collision">
+      <origin xyz="0   0   0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius=".1" length=".05"/>
+      </geometry>
+    </collision>
+    <visual name="left_wheel_visual">
+      <origin xyz="0   0   0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius=".1" length=".05"/>
+      </geometry>
+    </visual>
+  </link>
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="robot_chassis"/>
+    <child link="left_wheel"/>
+    <origin xyz="0.09999 0.1     0.09999" rpy="0     1.5707 1.5707"/>
+    <axis xyz="9.e-05 9.e-05 1.e+00"/>
+    <limit lower="-10000" upper="10000" effort="0" velocity="0"/>
+  </joint>
+  
+  <link name="right_wheel">
+    <inertial>
+      <mass value="1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <collision name="right_wheel_collision">
+      <origin xyz="0    0   -0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius=".1" length=".05"/>
+      </geometry>
+    </collision>
+    <visual name="right_wheel_visual">
+      <origin xyz="0    0   -0.03" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius=".1" length=".05"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="robot_chassis"/>
+    <child link="right_wheel"/>
+    <origin xyz="0.1 -0.1  0.1" rpy="0     1.5707 1.5707"/>
+    <axis xyz="9.e-05 9.e-05 1.e+00"/>
+    <limit lower="-10000" upper="10000" effort="0" velocity="0"/>
+  </joint>
+
+
+</robot>
